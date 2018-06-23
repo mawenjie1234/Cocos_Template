@@ -1,6 +1,5 @@
 export default class Platform{
 
-    
     static get isIOS () {
         return cc.sys.os === cc.sys.OS_IOS && !cc.sys.isBrowser;
     };
