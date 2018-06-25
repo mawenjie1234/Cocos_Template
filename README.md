@@ -23,7 +23,6 @@
 * [CommonUI](#1.5)
     * [Alert 标准小弹窗](#1.5.1)
     * [UIUtility 动画集合](#1.4.6)
-* [创建自己的游戏需要做什么](#1.6)
 
 ---
 ## [Android](#2)
@@ -65,6 +64,8 @@
     * [IAP](#2.2.10)
 
 ---
+## [创建自己的游戏需要做什么](#4)
+---
 
 <h2 id = 1>Cocos AppTemplate 简介</h2>
 本章将介绍coco AppTemplate中的一些类的使用方法，并在介绍结尾处说明在创建好自己的游戏后需要做哪些操作 
@@ -93,10 +94,19 @@
 <h5 id = 1.5.1>1.5.1 Alert 标准小弹窗</h5>
 <h5 id = 1.5.2>1.5.2 UIUtility 动画集合</h5>
 
-<h3 id = 1.6>1.6创建自己的游戏需要做什么</h3>
 
 
 <h2 id = 2 >Android</h2>
 <h3 id = 2.1 >2.1 Android init </h3>
+
+<h5 id = 2.1.1>2.1.1 Android 创建时 cocos的选择</h5>
+    cocos creator 构建的时候依然按照Android和ios目录区分的原则。所以Android 构建目录是 release/android, 构建选择template 为 default. binary在cocos 182版本以上就不能选择API Level为20以下的了，如果APILevel版本不能更低，那么有一大部分机型将不能跑起来，因此选择default 目录,构建完成后将生成Android下的目录，之后需要在Android Studio中进行编译。
+
+<h5 id = 2.1.2>2.1.2 build.gradle 修改</h5>
+
+    
+
+<h2 id = 4> 创建自己的游戏需要做什么</h2>
+    1. 在构建之前，重新命名 release/android/jsb-default，然后cocos点击build, 等待结束后用原来default目录下的 framework/runtime-src 覆盖新的目录中的runtime-src，并可以删除之前的jsb-default,目的是生成一个cocos2d-x 的项目（每个有代码的用户必须有这个流程，之后可以完善不需要依赖cocos 库） 
 
 
