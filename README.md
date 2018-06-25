@@ -26,39 +26,45 @@
 * [创建自己的游戏需要做什么](#1.6)
 
 ---
-## Android
-* Android 添加公司积木，连通cocos
-1. session 管理
-2. 用户信息
-3. GDPR
-4. config
-5. 工具
-* Android 添加Ads类
-1. fullscreen ad
-2. reward video 
-3. express ad
-* Android 添加 Autopilot
-1. 集成
-* Android 添加 notification
-* IAP
+## [Android](#2)
+* [Android init](#2.1)
+    * [Android 创建时 cocos的选择](#2.1.1)
+    * [build.gradle 修改](#2.1.2)
+
+* [Android Framework](#2.2)
+    * [接入公司 Framework, ads等库](#2.2.1)
+    * [实现 js 中platform中的内容](#2.2.2)
+        * getConfig
+        * mediasource
+        * 
+    * [session 通知js](#2.2.3)
+    * [GDPR](#2.2.4)
+    * [fullscreen ad](#2.2.5)
+    * [reward video ](#2.2.6)
+    * [express ad](#2.2.7)
+    * [Android 添加 Autopilot](#2.2.8)
+    * [Android 添加 notification](#2.2.9)
+    * [IAP](#2.2.10)
 
 ---
-## IOS
-### IOS 添加公司积木，连通cocos
-1. session 管理
-2. 用户信息
-3. GDPR
-4. config
-5. 工具
-### IOS 添加Ads类
-1. fullscreen ad
-2. reward video 
-3. express ad
-### IOS 添加 Autopilot
-1. 集成
-### IOS 添加 notification
-### IAP
+## [IOS](#2)
+* [IOS init](#2.1)
+    * [IOS 创建时 cocos的选择](#2.1.1)
+* [IOS Framework](#2.2)
+    * [接入公司 Framework, ads等库](#2.2.1)
+    * [实现 js 中platform中的内容](#2.2.2)
+        * getConfig
+        * mediasource
+    * [session 通知js](#2.2.3)
+    * [GDPR](#2.2.4)
+    * [fullscreen ad](#2.2.5)
+    * [reward video ](#2.2.6)
+    * [express ad](#2.2.7)
+    * [Android 添加 Autopilot](#2.2.8)
+    * [Android 添加 notification](#2.2.9)
+    * [IAP](#2.2.10)
 
+---
 
 <h2 id = 1>Cocos AppTemplate 简介</h2>
 本章将介绍coco AppTemplate中的一些类的使用方法，并在介绍结尾处说明在创建好自己的游戏后需要做哪些操作 
@@ -75,7 +81,7 @@
 <h5 id = 1.3.5>1.3.5 i18n 多语言</h5>
 <h5 id = 1.3.6>1.3.6 Storage 本地存储</h5>
 
-<h3 id = 1.4>1.4 Framework</h3>
+<h3 id = 1.4 >1.4 Framework</h3>
 <h5 id = 1.4.1>1.4.1 Ads 广告大集合</h5>
 <h5 id = 1.4.2>1.4.2 IAP 内购</h5>
 <h5 id = 1.4.3>1.4.3 Autopilot AB测试</h5>
@@ -88,4 +94,9 @@
 <h5 id = 1.5.2>1.5.2 UIUtility 动画集合</h5>
 
 <h3 id = 1.6>1.6创建自己的游戏需要做什么</h3>
+
+
+<h2 id = 2 >Android</h2>
+<h3 id = 2.1 >2.1 Android init </h3>
+
 
