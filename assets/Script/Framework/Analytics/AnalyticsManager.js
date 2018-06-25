@@ -5,6 +5,9 @@ import Platform from "../Platform/Platform";
 
 export default class AnalyticsManager{
     
+    /**
+     * @type {AnalyticsManager}
+     */
     static get shared(){
         if(!this._init){
             this._init = new AnalyticsManager();

@@ -3,6 +3,9 @@ import NativeCaller, { JNIType } from "../../Base/NativeCaller";
 const RewardClassName = "";
 export default class RewardAd{
     
+    /**
+     * @type {RewardAd}
+     */
     static get shared(){
         if(!this._init){
             this._init = new RewardAd();

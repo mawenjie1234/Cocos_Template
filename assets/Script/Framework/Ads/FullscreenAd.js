@@ -1,6 +1,9 @@
 import NativeCaller, { JNIType } from "../../Base/NativeCaller";
 
 export default class FullscreenAd{
+    /**
+     * @type {FullscreenAd}
+     */
     static get shared(){
         if(!this._init){
             this._init = new FullscreenAd();

@@ -1,4 +1,8 @@
 export default class Storage{
+
+    /**
+     * @type {Storage}
+     */
     static get shared(){
         if(!this._init){
             this._init = new Storage();
