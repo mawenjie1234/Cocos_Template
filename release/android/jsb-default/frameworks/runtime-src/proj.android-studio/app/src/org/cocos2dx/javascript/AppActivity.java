@@ -23,6 +23,7 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.javascript;
 
+import org.cocos2d.template.R;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
@@ -32,12 +33,28 @@ import org.cocos2dx.javascript.SDKWrapper;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.ihs.app.analytics.HSAnalytics;
+import com.ihs.app.framework.HSSessionMgr;
+import com.ihs.commons.utils.HSLog;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import game.NativeAPI;
 
 public class AppActivity extends Cocos2dxActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        HSLog.d("initialization, Activity on create..........");
         super.onCreate(savedInstanceState);
+        overridePendingTransition(0, 0);
+        HSSessionMgr.onActivityCreate(this);
+
         // Workaround in https://stackoverflow.com/questions/16283079/re-launch-of-activity-on-home-button-but-only-the-first-time/16447508
         if (!isTaskRoot()) {
             // Android launched another instance of the root activity into an existing task
@@ -49,6 +66,7 @@ public class AppActivity extends Cocos2dxActivity {
         // DO OTHER INITIALIZATION BELOW
         
         SDKWrapper.getInstance().init(this);
+        NativeAPI.sharedInstance().init(this);
     }
 	
     @Override
@@ -133,4 +151,55 @@ public class AppActivity extends Cocos2dxActivity {
         SDKWrapper.getInstance().onStart();
         super.onStart();
     }
+
+
+
+    public void showQuitApplicationWarning() {
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Hook();
+            }
+        });
+    }
+
+    boolean isExit = false;
+
+    private void Hook() {
+        if (!isExit) {
+            isExit = true;
+            Toast.makeText(this, getResources().getText(R.string.TID_ALERT_EXIT_GAME), Toast.LENGTH_SHORT).show();
+            new Timer().schedule(new TimerTask() {
+
+                @Override
+                public void run() {
+                    // TODO Auto-generated method stub
+                    isExit = false;
+                }
+            }, 2000);
+        } else {
+            NativeAPI.sharedInstance().quitApplicationJS();
+            HSAnalytics.logEvent("double_back_pressed_quit");
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    int pid = android.os.Process.myPid();
+                    android.os.Process.killProcess(pid);
+                }
+            }, 200);
+        }
+    }
+    public void QuitApp(){
+        NativeAPI.sharedInstance().quitApplicationJS();
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int pid = android.os.Process.myPid();
+                android.os.Process.killProcess(pid);
+            }
+        },200);
+    }
+
 }
