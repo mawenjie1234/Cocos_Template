@@ -29,7 +29,7 @@ export default class NativeCaller {
 	constructor(className, method) {
 		this._class = className || NativeCaller.defaultClassName
 		if (cc.sys.os == cc.sys.OS_ANDROID) {
-			this._class = "solitaire/" + this._class
+			this._class = "game/" + this._class
 		}
 		this._method = method
 		this._sigNames = []

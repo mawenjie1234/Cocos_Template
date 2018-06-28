@@ -74,7 +74,7 @@ public class RewardedVideo {
         });
     }
 
-    public void showRewardedVideo(){
+    public void showRewardedVideo(String placement){
         mainHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -88,7 +88,7 @@ public class RewardedVideo {
                             mainHandler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onReward()");
+                                    //NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onReward()");
                                 }
                             },100);
                         }
@@ -105,7 +105,7 @@ public class RewardedVideo {
                             mainHandler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onRewardedVideoClose()");
+                                   // NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onRewardedVideoClose()");
                                 }
                             },100);
 
@@ -116,13 +116,14 @@ public class RewardedVideo {
 
                         @Override
                         public void onAdDisplay() {
-                            NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onRewardedVideoAdOpened()");
+                           // NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onRewardedVideoAdOpened()");
                             HSLog.d(">>>>onRewardedVideoAdOpened");
                         }
                     });
                     showingAd.show();
                 }else{
                     NativeAPI.sharedInstance().callJS("require('AdsManager').shared.onRewardedFailedToShow()");
+                    loadRewardedVideoAd();
                 }
             }
         });

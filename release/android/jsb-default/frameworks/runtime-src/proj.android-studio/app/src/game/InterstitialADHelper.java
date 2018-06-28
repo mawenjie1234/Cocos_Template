@@ -21,7 +21,7 @@ import java.util.Map;
 public class InterstitialADHelper implements AcbInterstitialAdLoader.AcbInterstitialAdLoadListener{
 
     private static InterstitialADHelper _instance;
-    private Map<String, List<AcbInterstitialAd>> cachedInterstitialAds;
+    private Map<String, List<AcbInterstitialAd>> cachedInterstitialAds = new HashMap<>();
     private Map<String,AcbInterstitialAdLoader> interstitialLoader = new HashMap<>();
     private int loadCount;
     private boolean isFullScreenAdDisplaying = false;
@@ -69,7 +69,7 @@ public class InterstitialADHelper implements AcbInterstitialAdLoader.AcbIntersti
                 AcbInterstitialAdLoader loader =  AcbInterstitialAdManager.createLoaderWithPlacement(placement);
                 loader.load(loadCount, InterstitialADHelper.this);
                 interstitialLoader.put(placement, loader);
-                NativeAPI.sharedInstance().callPlatformJS("onFullScreenRequest", "", "");
+                //NativeAPI.sharedInstance().callPlatformJS("onFullScreenRequest", "", "");
             }
         });
     }
@@ -93,14 +93,14 @@ public class InterstitialADHelper implements AcbInterstitialAdLoader.AcbIntersti
                         AutopilotEvent.onAdShow();
                         HSAnalytics.logEvent("Fullscreen_Ad_Did_Show", event);
                         GALogUtil.logGameEvent("ad", "Fullscreen_Ad_Did_Show", placement, null);
-                        NativeAPI.sharedInstance().callPlatformJS("onFullScreenAdDisplayed", "", "");
+                        //NativeAPI.sharedInstance().callPlatformJS("onFullScreenAdDisplayed", "", "");
                     }
 
                     @Override
                     public void onAdClicked() {
                         // 广告被点击回调
                         //AutopilotEvent.onAdClick();
-                        NativeAPI.sharedInstance().callPlatformJS("onFullScreenAdClicked", "", "");
+                        //NativeAPI.sharedInstance().callPlatformJS("onFullScreenAdClicked", "", "");
                     }
 
                     @Override

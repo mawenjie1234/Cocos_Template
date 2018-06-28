@@ -10,7 +10,7 @@ export default class RewardAd{
         if(!this._init){
             this._init = new RewardAd();
         }
-        return this.init;
+        return this._init;
     }
 
     constructor(){
@@ -33,10 +33,9 @@ export default class RewardAd{
 
     showReward(occasion){
         let placement = this.getPlacement(occasion);
-        let isShowSucceeded =  new NativeCaller(RewardClassName, "showReward")
+        new NativeCaller(RewardClassName, "showRewardedVideo")
             .argument(placement, "", JNIType.string)
-            .call(JNIType.boolean);
-        return isShowSucceeded;
+            .call(JNIType.void);
     }
 
     onRewardAdDisPlay(){

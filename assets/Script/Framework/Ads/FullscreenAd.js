@@ -19,7 +19,7 @@ export default class FullscreenAd{
         if(!occasion){
             return;
         }
-        return "Game";
+        return "GameWon0";
     }
 
     getFullscreenAdCount(occasion){
@@ -33,10 +33,9 @@ export default class FullscreenAd{
             return;
         }
         let placement = this.getPlacementName(occasion);
-        let isShowSucceeded = new NativeCaller(NativeCaller.defaultClassName, "showFullscreenAd")
+        new NativeCaller(NativeCaller.defaultClassName, "showFullscreenAd")
             .argument(placement, "", JNIType.string)
-            .call(JNIType.boolean);
-        return isShowSucceeded;
+            .call(JNIType.void);
     }
 
     onFullScreenAdDisplayed(){

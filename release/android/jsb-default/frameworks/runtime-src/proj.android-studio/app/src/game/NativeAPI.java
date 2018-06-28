@@ -26,7 +26,7 @@ import com.ihs.commons.utils.HSDeviceUtils;
 import com.ihs.commons.utils.HSLog;
 
 
-import org.cocos2d.template.R;
+import com.fingerstudios.solitaire.classic.R;
 import org.cocos2dx.javascript.AppActivity;
 import org.cocos2dx.lib.Cocos2dxJavascriptJavaBridge;
 import org.json.JSONException;
@@ -146,9 +146,8 @@ public class NativeAPI {
         RewardedVideo.sharedInstance().loadRewardedVideoAd();
     }
 
-    public String onJSInitied() {
+    public void onJSInitied() {
         isJSReady = true;
-        return cocos2dxActivity.getApplication().getPackageName();
     }
 
 
@@ -371,7 +370,7 @@ public class NativeAPI {
         Utils.jump2market();
     }
 
-    public boolean sendEmail(){
+    public void sendEmail(){
         cocos2dxActivity.runOnUiThread(new Runnable() {
             public void run() {
                 Uri uri = Uri.parse("mailto:feedback.classicsolitaire@gmail.com");
@@ -388,7 +387,6 @@ public class NativeAPI {
                 cocos2dxActivity.startActivityForResult(Intent.createChooser(intent, "Email"), 1);
             }
         });
-        return true;
     }
 
 

@@ -23,10 +23,11 @@ THE SOFTWARE.
 ****************************************************************************/
 package org.cocos2dx.javascript;
 
-import org.cocos2d.template.R;
 import org.cocos2dx.lib.Cocos2dxActivity;
 import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
+import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import org.cocos2dx.javascript.SDKWrapper;
 
@@ -35,8 +36,12 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.Display;
+import android.view.KeyEvent;
+import android.view.View;
 import android.widget.Toast;
 
+import com.fingerstudios.solitaire.classic.R;
 import com.ihs.app.analytics.HSAnalytics;
 import com.ihs.app.framework.HSSessionMgr;
 import com.ihs.commons.utils.HSLog;
@@ -44,9 +49,14 @@ import com.ihs.commons.utils.HSLog;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import game.GALogUtil;
+import game.InterstitialADHelper;
+import game.InterstitialApplication;
 import game.NativeAPI;
 
 public class AppActivity extends Cocos2dxActivity {
+    private boolean isBackPressed = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +77,7 @@ public class AppActivity extends Cocos2dxActivity {
         
         SDKWrapper.getInstance().init(this);
         NativeAPI.sharedInstance().init(this);
+        InterstitialADHelper.sharedInstance().init(this);
     }
 	
     @Override
@@ -82,14 +93,31 @@ public class AppActivity extends Cocos2dxActivity {
 
     @Override
     protected void onResume() {
+        HSLog.d("game , Activity on resume..........");
         super.onResume();
         SDKWrapper.getInstance().onResume();
+    }
+
+    @Override
+    protected void hideVirtualButton() {
+        if (getResources().getBoolean(R.bool.isTablet)) {
+            if (Build.VERSION.SDK_INT >= 19) {
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                );
+            }
+        } else {
+            super.hideVirtualButton();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         SDKWrapper.getInstance().onPause();
+        NativeAPI.sharedInstance().callPlatformJS("onAppPause","");
     }
 
     @Override
@@ -120,12 +148,23 @@ public class AppActivity extends Cocos2dxActivity {
     protected void onStop() {
         super.onStop();
         SDKWrapper.getInstance().onStop();
+        HSSessionMgr.onActivityStop(this, this.isBackPressed);
+        GALogUtil.logGameEvent("App","GameSessionEnd",null,null);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            this.isBackPressed = false;
+        }
+        return super.onKeyDown(keyCode, event);
     }
         
     @Override
     public void onBackPressed() {
         SDKWrapper.getInstance().onBackPressed();
         super.onBackPressed();
+        this.isBackPressed = true;
     }
 
     @Override
@@ -148,10 +187,12 @@ public class AppActivity extends Cocos2dxActivity {
 
     @Override
     protected void onStart() {
+        this.isBackPressed = false;
         SDKWrapper.getInstance().onStart();
         super.onStart();
+        HSSessionMgr.onActivityStart(this);
+        GALogUtil.logGameEvent("App","GameSessionStart",null,null);
     }
-
 
 
     public void showQuitApplicationWarning() {
@@ -200,6 +241,13 @@ public class AppActivity extends Cocos2dxActivity {
                 android.os.Process.killProcess(pid);
             }
         },200);
+    }
+
+    private Point getDisplaySize() {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size;
     }
 
 }

@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name" translatable="false">hello_world</string>
+    <string name="app_name" translatable="false">Game</string>
     <string name="TID_ALERT_EXIT_GAME">Please click BACK again to exit</string>
+    <string name="facebook_app_id">532302070227476</string>
+
 
 </resources>

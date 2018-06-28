@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "747608775463",
+    "firebase_url": "https://king-25993.firebaseio.com",
+    "project_id": "king-25993",
+    "storage_bucket": "king-25993.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747608775463:android:097b6ce8062ec391",
+        "android_client_info": {
+          "package_name": "com.fingerstudios.solitaire.classic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747608775463-qhvbdsf0did4nlrpiilgsq3mkab62592.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1DI2E5-nRVWpRt6sbnjVGBBs_qxXODdI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

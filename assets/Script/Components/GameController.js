@@ -1,5 +1,5 @@
-import RewardAd from "../Framework/Ads/RewardAd"
 import FullscreenAd from "../Framework/Ads/FullscreenAd"
+import RewardAd from "../Framework/Ads/RewardAd";
 
 const {ccclass, properties} = cc._decorator;
 @ccclass
@@ -14,11 +14,11 @@ export default class GameController extends cc.Component{
     }
 
     showFullscreenAd(){
-        FullscreenAd.shared.showFullscreenAd("game_won");
+        FullscreenAd.shared.showFullscreenAd("GameWon0");
     }
 
     showRewardAd(){
-        RewardAd.shared.showReward("game_won");
+        RewardAd.shared.showReward("Reward0");
     }
 
     showExpressAd(){

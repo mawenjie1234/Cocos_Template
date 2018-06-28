@@ -541,7 +541,7 @@ require = function() {
         key: "getPlacementName",
         value: function getPlacementName(occasion) {
           if (!occasion) return;
-          return "Game";
+          return "GameWon0";
         }
       }, {
         key: "getFullscreenAdCount",
@@ -553,8 +553,7 @@ require = function() {
         value: function showFullscreenAd(occasion) {
           if (!occasion) return;
           var placement = this.getPlacementName(occasion);
-          var isShowSucceeded = new _NativeCaller2.default(_NativeCaller2.default.defaultClassName, "showFullscreenAd").argument(placement, "", _NativeCaller.JNIType.string).call(_NativeCaller.JNIType.boolean);
-          return isShowSucceeded;
+          new _NativeCaller2.default(_NativeCaller2.default.defaultClassName, "showFullscreenAd").argument(placement, "", _NativeCaller.JNIType.string).call(_NativeCaller.JNIType.void);
         }
       }, {
         key: "onFullScreenAdDisplayed",
@@ -605,10 +604,10 @@ require = function() {
       };
     }();
     var _class;
-    var _RewardAd = require("../Framework/Ads/RewardAd");
-    var _RewardAd2 = _interopRequireDefault(_RewardAd);
     var _FullscreenAd = require("../Framework/Ads/FullscreenAd");
     var _FullscreenAd2 = _interopRequireDefault(_FullscreenAd);
+    var _RewardAd = require("../Framework/Ads/RewardAd");
+    var _RewardAd2 = _interopRequireDefault(_RewardAd);
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {
         default: obj
@@ -646,12 +645,12 @@ require = function() {
       }, {
         key: "showFullscreenAd",
         value: function showFullscreenAd() {
-          _FullscreenAd2.default.shared.showFullscreenAd("game_won");
+          _FullscreenAd2.default.shared.showFullscreenAd("GameWon0");
         }
       }, {
         key: "showRewardAd",
         value: function showRewardAd() {
-          _RewardAd2.default.shared.showReward("game_won");
+          _RewardAd2.default.shared.showReward("Reward0");
         }
       }, {
         key: "showExpressAd",
@@ -897,7 +896,7 @@ require = function() {
       function NativeCaller(className, method) {
         _classCallCheck(this, NativeCaller);
         this._class = className || NativeCaller.defaultClassName;
-        cc.sys.os == cc.sys.OS_ANDROID && (this._class = "solitaire/" + this._class);
+        cc.sys.os == cc.sys.OS_ANDROID && (this._class = "game/" + this._class);
         this._method = method;
         this._sigNames = [];
         this._argValues = [];
@@ -1065,7 +1064,7 @@ require = function() {
         key: "shared",
         get: function get() {
           this._init || (this._init = new RewardAd());
-          return this.init;
+          return this._init;
         }
       } ]);
       function RewardAd() {
@@ -1087,8 +1086,7 @@ require = function() {
         key: "showReward",
         value: function showReward(occasion) {
           var placement = this.getPlacement(occasion);
-          var isShowSucceeded = new _NativeCaller2.default(RewardClassName, "showReward").argument(placement, "", _NativeCaller.JNIType.string).call(_NativeCaller.JNIType.boolean);
-          return isShowSucceeded;
+          new _NativeCaller2.default(RewardClassName, "showRewardedVideo").argument(placement, "", _NativeCaller.JNIType.string).call(_NativeCaller.JNIType.void);
         }
       }, {
         key: "onRewardAdDisPlay",

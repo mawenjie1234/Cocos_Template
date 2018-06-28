@@ -146,8 +146,8 @@ public class CCNativeAPIProxy {
         NativeAPI.sharedInstance().reportJSError(errJSONStr);
     }
 
-    public static String onJSInited() {
-        return NativeAPI.sharedInstance().onJSInitied();
+    public static void  onJSInited() {
+        NativeAPI.sharedInstance().onJSInitied();
     }
 
 
@@ -186,8 +186,8 @@ public class CCNativeAPIProxy {
         return HSVersionControlUtils.getAppVersionCode();
     }
 
-    public static boolean sendEmail() {
-        return NativeAPI.sharedInstance().sendEmail();
+    public static void sendEmail() {
+         NativeAPI.sharedInstance().sendEmail();
     }
 
 
@@ -210,12 +210,16 @@ public class CCNativeAPIProxy {
 
 
     // ads
-    public static void playFullScreenAd(String type) {
+    public static void showFullscreenAd(String type) {
         InterstitialADHelper.sharedInstance().playFullScreenAd(type);
     }
 
-    public static void showRewardedVideo() {
-        RewardedVideo.sharedInstance().showRewardedVideo();
+    public static void showFullscreenAd() {
+        InterstitialADHelper.sharedInstance().playFullScreenAd("GameWon0");
+    }
+
+    public static void showRewardedVideo(String placement) {
+        RewardedVideo.sharedInstance().showRewardedVideo(placement);
     }
 
     public static void loadRewardVideo(String placement) {
